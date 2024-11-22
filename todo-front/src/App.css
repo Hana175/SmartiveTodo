@@ -1,0 +1,29 @@
+body{
+  background-color: #6eaaf4;
+}
+.App {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  color:rgb(0, 0, 0)
+}
+
+.todo-list {
+  margin-top: 20px;
+}
+
+.todo-item {
+  background: #f3f3f3;
+  padding: 10px;
+  margin: 5px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-todo-form input {
+  padding: 10px;
+  margin-right: 5px;
+}
+
+.add-todo-form button {
+  padding: 10px;
+}

@@ -19,7 +19,7 @@ beforeEach(() => {
   ];
 });
 
-// Unit test for the GET /todos/:id endpoint
+// Unit test for the GET /todos/:id endpoin
 describe("GET /todos/:id", () => {
   it("should return 404 if todo not found", async () => {
     const response = await request(app).get("/todos/999"); // Invalid ID

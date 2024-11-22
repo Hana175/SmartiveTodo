@@ -31,9 +31,7 @@ const createTodo = (req, res) => {
 
   todos.push(newTodo);
 
-  res.status(201).json({
-    message: `New todo with id ${newTodo.id} and title ${newTodo.title} has been created.`,
-  });
+  res.status(201).json(newTodo);
 };
 
 const deleteTodo = (req, res) => {
@@ -51,16 +49,23 @@ const deleteTodo = (req, res) => {
 const updateTodo = (req, res) => {
   const { id } = req.params;
   const { title, body } = req.body;
+  console.log("PUT Request Body:", req.body);
 
   const todo = todos.find((t) => t.id === parseInt(id));
-
   if (!todo) {
     return res.status(404).json({ message: "Todo not found" });
   }
 
-  if (title) todo.title = title;
-  if (body) todo.body = body;
+  if (title) {
+    todo.title = title;
+    console.log(`Updated title to: ${title}`);
+  }
+  if (body) {
+    todo.body = body;
+    console.log(`Updated body to: ${body}`);
+  }
 
+  console.log("Updated Todo:", todo);
   res.json(todo);
 };
 
