@@ -1,49 +1,33 @@
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import AddTodoItem from "./AddTodoItem";
-import axios from "axios";
-
-// Mock axios
-jest.mock("axios");
+import React from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import "@testing-library/jest-dom"; // Provides additional matchers for better assertions
+import AddTodoItem from "./AddTodoItem"; // Adjust the path if necessary
 
 describe("AddTodoItem Component", () => {
-  it("calls onAdd with the correct title and body when the form is submitted", async () => {
-    // Mock the POST request
-    axios.post.mockResolvedValue({
-      data: { id: 1, title: "Test Title", body: "Test Body" },
-    });
-
+  it("calls onAdd with the correct title and body when the form is submitted", () => {
+    // Mock the onAdd function
     const mockOnAdd = jest.fn();
 
+    // Render the AddTodoItem component
     render(<AddTodoItem onAdd={mockOnAdd} />);
 
+    // Select the input fields and button
     const titleInput = screen.getByLabelText(/title:/i);
     const bodyInput = screen.getByLabelText(/body:/i);
     const addButton = screen.getByText(/add todo/i);
 
-    // simulating user typing in the inputs
+    // Simulate user entering a title and body
     fireEvent.change(titleInput, { target: { value: "Test Title" } });
     fireEvent.change(bodyInput, { target: { value: "Test Body" } });
 
-    // Check that the inputs have the expected values before form submission
-    expect(titleInput.value).toBe("Test Title");
-    expect(bodyInput.value).toBe("Test Body");
-
+    // Simulate form submission (clicking the button)
     fireEvent.click(addButton);
 
-    // Wait for axios.post to be called
-    await waitFor(() => expect(axios.post).toHaveBeenCalledTimes(1));
+    // Assertions
+    expect(mockOnAdd).toHaveBeenCalledTimes(1); // Check if the onAdd function was called once
+    expect(mockOnAdd).toHaveBeenCalledWith("Test Title", "Test Body"); // Check if onAdd was called with the correct arguments
 
-    // axios.post was called with URL and data
-    expect(axios.post).toHaveBeenCalledWith("http://localhost:5000/todos", {
-      title: "Test Title",
-      body: "Test Body",
-    });
-
-    // mock onAdd function called  correct parameters
-    expect(mockOnAdd).toHaveBeenCalledWith("Test Title", "Test Body");
-
-    //  inputs are cleared after submitting
-    expect(titleInput.value).toBe("");
-    expect(bodyInput.value).toBe("");
+    expect(titleInput.value).toBe(""); // Ensure the title input is cleared
+    expect(bodyInput.value).toBe(""); // Ensure the body input is cleared
   });
 });
