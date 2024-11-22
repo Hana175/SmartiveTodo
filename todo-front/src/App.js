@@ -10,7 +10,7 @@ const App = () => {
   useEffect(() => {
     const fetchTodos = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/todos");
+        const response = await axios.get("http://localhost:5001/todos");
         setTodos(response.data.todos);
       } catch (error) {
         console.error("Error fetching todos:", error);
@@ -23,7 +23,7 @@ const App = () => {
   // Add a new todo
   const addTodo = async (title, body) => {
     try {
-      const response = await axios.post("http://localhost:5000/todos", {
+      const response = await axios.post("http://localhost:5001/todos", {
         title,
         body,
       });
@@ -38,7 +38,7 @@ const App = () => {
   // Delete a todo
   const deleteTodo = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/todos/${id}`);
+      await axios.delete(`http://localhost:5001/todos/${id}`);
       setTodos(todos.filter((todo) => todo.id !== id));
     } catch (error) {
       console.error("Error deleting the todo:", error);
@@ -49,7 +49,7 @@ const App = () => {
   const editTodo = async (id, title, body) => {
     console.log("Editing todo with data:", { id, title, body }); // Log parameters
     try {
-      const response = await axios.put(`http://localhost:5000/todos/${id}`, {
+      const response = await axios.put(`http://localhost:5001/todos/${id}`, {
         title,
         body,
       });
