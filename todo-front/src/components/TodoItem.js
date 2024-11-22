@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./TodoItem.css"; // Import the CSS for styling the cards
+import "./TodoItem.css";
 
 const TodoItem = ({ id, title, body, onDelete, onEdit }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -7,7 +7,7 @@ const TodoItem = ({ id, title, body, onDelete, onEdit }) => {
   const [newBody, setNewBody] = useState(body);
 
   useEffect(() => {
-    setNewTitle(title); // Initialize with current props
+    setNewTitle(title); 
     setNewBody(body);
   }, [title, body]);
 
@@ -20,8 +20,8 @@ const TodoItem = ({ id, title, body, onDelete, onEdit }) => {
 
   // Save changes
   const handleSave = () => {
-    console.log("Saving with:", { id, newTitle, newBody }); // Log the call
-    onEdit(newTitle, newBody); // Explicitly pass the parameters
+    console.log("Saving with:", { id, newTitle, newBody }); 
+    onEdit(newTitle, newBody);
     setIsEditing(false);
   };
 

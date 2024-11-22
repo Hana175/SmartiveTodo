@@ -63,3 +63,7 @@ Styling was made using CSS.
 4. In the terminal where the backend directory TaskSmartive is active, run "npm start" to start the backend.
 
 5. In the terminal where the frontend directory todo-front is active, run "npm start" to start the frontend.
+
+6. To test the Backend: In the terminal where the backend directory TaskSmartive is active, run "npm test"
+
+7. To test the Frontend: In the terminal where the frontend directory todo-front is active, run "npm test"
